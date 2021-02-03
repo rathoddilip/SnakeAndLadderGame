@@ -1,5 +1,5 @@
 ﻿using System;
-
+using System.Collections;
 namespace SnakeLadderApp
 {
     class SnakeLadder
@@ -50,16 +50,28 @@ namespace SnakeLadderApp
 
             int position = 0;
             int NUMBER_OF_PLAYER = 1;
+            //int count=0;
+            ArrayList positions = new ArrayList();
+            //var positions = new ArrayList();
             Console.WriteLine("Welcome to Snake and Ladder Simulation");
             while (position < FINAL_POSITION)
             {
                 Random randomNumber = new Random();
-                int dieRoll = randomNumber.Next(1, 6);
+                int dieRoll = randomNumber.Next(1,7);
                 position = optionCheck(dieRoll, position);
+                positions.Add(position);
+               
             }
-            Console.WriteLine("Final position : "+ position);
+            //Console.WriteLine("final position: " + position + " number of times die rolled: " + count);
+            Console.WriteLine("final position: " + position);
+            Console.WriteLine(" number of times die rolled: " +positions.Count);//Report number of time dice was played to win the game
+            Console.Write("position after every roll: "); 
 
-
-        }
-    }
-}
+            foreach (int i in positions)
+            {
+                Console.Write(i + " ");
+            }
+          
+        }//main method
+    }//snakeladder class
+}//namespace
