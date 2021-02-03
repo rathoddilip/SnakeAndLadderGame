@@ -17,13 +17,18 @@ namespace SnakeLadderApp
         /// <summary>
         /// Static method for dieRoall and position
         /// </summary>
-        /// <param name="dieRoll"></param>
-        /// <param name="position"></param>
-        /// <returns></returns>
-        static int optionCheck(int dieRoll, int position)
+        
+        static int diceRoll()
+        {
+
+            Random randomNumber = new Random();
+            int die = randomNumber.Next(1, 7);
+            return die;
+        }
+            static int optionCheck(int dieRoll, int position)
         {
             Random randomNumber = new Random();
-            int option = randomNumber.Next(1, 3);
+            int option = randomNumber.Next(1, 4);
 
             switch (option)
             {
@@ -34,44 +39,75 @@ namespace SnakeLadderApp
                     position -= dieRoll;
                     break;
                 case LADDER:
+                    int dieRoll1 = diceRoll();
                     if (position + dieRoll > 100)
                         position = position;
                     else
                         position += dieRoll;
+                    if (position + dieRoll1 > 100)
+                        position = position;
+                    else
+                        position += dieRoll1;
+
+
                     break;
             }
             if (position < 0)
-                position = INIIAL_POSITION;
-                return position;
+                position = 0;
+            return position;
         }
 
-        static void Main(string[] args)
+        public static void game()
         {
-
             int position = 0;
-            int NUMBER_OF_PLAYER = 1;
-            //int count=0;
-            ArrayList positions = new ArrayList();
-            //var positions = new ArrayList();
-            Console.WriteLine("Welcome to Snake and Ladder Simulation");
-            while (position < FINAL_POSITION)
+            int positionA = 0;
+            int count = 0;
+            int positionB = 0;
+            
+            ArrayList posA = new ArrayList();
+            ArrayList posB = new ArrayList();
+            
+            while (position < 100)
             {
-                Random randomNumber = new Random();
-                int dieRoll = randomNumber.Next(1,7);
-                position = optionCheck(dieRoll, position);
-                positions.Add(position);
-               
+                int dieRollA = diceRoll();
+                int dieRollB = diceRoll();
+                positionA = optionCheck(dieRollA, positionA);
+                positionB = optionCheck(dieRollB, positionB);
+                posB.Add(positionB);
+                posA.Add(positionA);
+                if (positionA > positionB)
+                    position = positionA;
+                else
+                    position = positionB;
+                count++;
             }
-            //Console.WriteLine("final position: " + position + " number of times die rolled: " + count);
-            Console.WriteLine("final position: " + position);
-            Console.WriteLine(" number of times die rolled: " +positions.Count);//Report number of time dice was played to win the game
-            Console.Write("position after every roll: "); 
+            if (positionA > positionB)
+                Console.WriteLine("Player A is winner");
 
-            foreach (int i in positions)
+          else
+            Console.WriteLine("Player B is winner");
+            Console.WriteLine("position of A: " + positionA + " position of B: " + positionB);
+            Console.WriteLine("number of times each player rolled die rolled:" + count);
+            //Console.WriteLine("position of A after every roll:" + posA);
+            Console.Write("position of A after every roll: ");
+            foreach (int i in posA)
             {
                 Console.Write(i + " ");
             }
-          
+
+            Console.WriteLine();
+            // Console.WriteLine("position of B after every roll:" + posB);
+            Console.Write("position of B after every roll: ");
+            foreach (int i in posB)
+            {
+                Console.Write(i + " ");
+            }
+        }
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Welcome to Snake and Ladder Simulation");
+            game();
+
         }//main method
     }//snakeladder class
 }//namespace
