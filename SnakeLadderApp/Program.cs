@@ -34,7 +34,10 @@ namespace SnakeLadderApp
                     position -= dieRoll;
                     break;
                 case LADDER:
-                    position += dieRoll;
+                    if (position + dieRoll > 100)
+                        position = position;
+                    else
+                        position += dieRoll;
                     break;
             }
             if (position < 0)
@@ -54,7 +57,7 @@ namespace SnakeLadderApp
                 int dieRoll = randomNumber.Next(1, 6);
                 position = optionCheck(dieRoll, position);
             }
-            Console.WriteLine("Final position : " + " position: " + position);
+            Console.WriteLine("Final position : "+ position);
 
 
         }
