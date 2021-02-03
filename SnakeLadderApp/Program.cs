@@ -37,7 +37,9 @@ namespace SnakeLadderApp
                     position += dieRoll;
                     break;
             }
-            return position;
+            if (position < 0)
+                position = INIIAL_POSITION;
+                return position;
         }
 
         static void Main(string[] args)
@@ -46,10 +48,13 @@ namespace SnakeLadderApp
             int position = 0;
             int NUMBER_OF_PLAYER = 1;
             Console.WriteLine("Welcome to Snake and Ladder Simulation");
-            Random randomNumber = new Random();
-            int dieRoll = randomNumber.Next(1, 6);
-            position = optionCheck(dieRoll, position);
-            Console.WriteLine("Number got by rolling a die: " + dieRoll + " position: " + position);
+            while (position < FINAL_POSITION)
+            {
+                Random randomNumber = new Random();
+                int dieRoll = randomNumber.Next(1, 6);
+                position = optionCheck(dieRoll, position);
+            }
+            Console.WriteLine("Final position : " + " position: " + position);
 
 
         }
