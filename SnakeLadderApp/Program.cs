@@ -44,12 +44,7 @@ namespace SnakeLadderApp
                         position = position;
                     else
                         position += dieRoll;
-                    if (position + dieRoll1 > 100)
-                        position = position;
-                    else
-                        position += dieRoll1;
-
-
+                   
                     break;
             }
             if (position < 0)
